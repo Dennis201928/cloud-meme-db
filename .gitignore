@@ -1,1 +1,10 @@
 app/__pycache__
+
+.idea
+
+
+/venv/
+
+/app/utils/log/app.log
+
+.env
