@@ -15,7 +15,7 @@ def create_db_uri():
         password = config('AWS_MYSQL_PASSWORD')
         db_name = config('AWS_MYSQL_DB_NAME')
         port = config('AWS_MYSQL_PORT')
-        print(f'mysql+pymysql://{user}:{password}@{host}:{port}/{db_name}')
+
         return f'mysql+pymysql://{user}:{password}@{host}:{port}/{db_name}'
     except Exception as e:
         Logger.add_to_log("error", "Error al generar la URI de la base de datos")

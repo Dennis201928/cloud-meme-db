@@ -1,6 +1,8 @@
-from app import db
 import uuid
 from datetime import datetime
+
+from app.database.db_mysql import db
+
 
 class Meme(db.Model):
     __tablename__ = 'memes'

@@ -1,19 +1,22 @@
 import boto3
-from flask import request, jsonify
-from app import app, db
+from flask import request, jsonify, Blueprint
+
+from app.database.db_mysql import db
 from app.models import Etiqueta, Meme
 from app.imagga import get_image_tags  # Importamos la función para obtener las etiquetas de Imagga
+
+routes = Blueprint('routes', __name__)
 
 # Configuración del cliente S3
 S3_BUCKET = "meme-storagee"  # Cambia por el nombre de tu bucket
 S3_REGION = "us-east-2"
 s3_client = boto3.client('s3', region_name=S3_REGION)
 
-@app.route('/')
+@routes.route('/')
 def home():
     return "<h1>¡Bienvenido a Cloud MemeDB!</h1>"
 
-@app.route('/upload', methods=['POST'])
+@routes.route('/upload', methods=['POST'])
 def upload_meme():
     try:
         # Verifica si el archivo está en la solicitud
@@ -72,7 +75,7 @@ def upload_meme():
 
 
 
-@app.route('/search', methods=['GET'])
+@routes.route('/search', methods=['GET'])
 def search_meme():
     query = request.args.get('q', '').lower()
     if not query:
